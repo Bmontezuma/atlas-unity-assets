@@ -1,36 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public abstract class BaseItemCreation<T> : EditorWindow where T : BaseItem
 {
+    // Common fields for item creation
     protected string itemName;
     protected Sprite icon;
     protected string description;
     protected float baseValue;
     protected int requiredLevel;
     protected Rarity rarity;
-    
+
+    // Method to show the window
     public static void ShowWindow()
     {
         EditorWindow.GetWindow(typeof(BaseItemCreation<T>), true, "Create New Item");
     }
 
-    protected void DrawCommonFields()
+    // Method to draw common fields for item creation
+    protected virtual void OnGUI()
     {
-        itemName = EditorGUILayout.TextField("Name:", itemName);
-        icon = (Sprite)EditorGUILayout.ObjectField("Icon:", icon, typeof(Sprite), false);
-        description = EditorGUILayout.TextField("Description:", description);
-        baseValue = EditorGUILayout.FloatField("Base Value:", baseValue);
-        requiredLevel = EditorGUILayout.IntField("Required Level:", requiredLevel);
-        rarity = (Rarity)EditorGUILayout.EnumPopup("Rarity:", rarity);
+        DrawCommonFields();
     }
 
-    protected void CreateItem<T>() where T : BaseItem
+    // Method to create the item
+    protected virtual void CreateItem(T newItem)
     {
-        T newItem = CreateInstance<T>();
-
         // Determine the folder path based on the type of item
         string folderPath = "Assets/Items/";
         if (typeof(T) == typeof(Weapon))
@@ -58,13 +53,23 @@ public abstract class BaseItemCreation<T> : EditorWindow where T : BaseItem
         fullPath = AssetDatabase.GenerateUniqueAssetPath(fullPath);
 
         AssetDatabase.CreateAsset(newItem, fullPath);
-        
+
         newItem.itemName = itemName;
         newItem.baseValue = baseValue;
         newItem.rarity = rarity;
-        
+
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
 
+    // Method to draw common fields for item creation
+    protected void DrawCommonFields()
+    {
+        itemName = EditorGUILayout.TextField("Name:", itemName);
+        icon = (Sprite)EditorGUILayout.ObjectField("Icon:", icon, typeof(Sprite), false);
+        description = EditorGUILayout.TextField("Description:", description);
+        baseValue = EditorGUILayout.FloatField("Base Value:", baseValue);
+        requiredLevel = EditorGUILayout.IntField("Required Level:", requiredLevel);
+        rarity = (Rarity)EditorGUILayout.EnumPopup("Rarity:", rarity);
+    }
 }

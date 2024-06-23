@@ -5,28 +5,24 @@ using UnityEditor;
 
 public class WeaponDatabase : ItemDatabase<Weapon>
 {
-    // Implementing abstract method to import items from CSV
-    public override void ImportItemsFromCSV()
+    protected override void ImportItemsFromCSV()
     {
-        // Implement import logic here
+        // Implement your specific import logic for weapons
     }
 
-    // Implementing abstract method to draw properties section
-    public override void DrawPropertiesSection()
+    protected override void DrawPropertiesSection()
     {
-        // Implement drawing properties section UI here
+        // Implement how weapon properties are drawn in the editor
     }
 
-    // Implementing abstract method to export items to CSV
-    public override void ExportItemsToCSV()
+    protected override void DrawItemList()
     {
-        // Implement export logic here
+        // Implement how the list of weapons is drawn in the editor
     }
 
-    // Implementing abstract method to draw item list
-    public override void DrawItemList()
+    protected override void ExportItemsToCSV()
     {
-        // Implement drawing item list UI here
+        // Implement your specific export logic for weapons
     }
 
     [MenuItem("Window/Item Manager/Weapon Database")]
