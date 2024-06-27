@@ -29,9 +29,9 @@ Let’s expand the “Item Database” Editor menu!
 
 First, create three new scripts that inherit from ItemDatabase like so.
 
-public class [ArmorDatabase]() : ItemDatabase<Armor>
-public class PotionDatabase : ItemDatabase<Potion>
-public class WeaponDatabase : ItemDatabase<Weapon>
+public class [ArmorDatabase](https://github.com/Bmontezuma/atlas-unity-assets/blob/main/Assets/Editor/ArmorDatabase.cs) : ItemDatabase<Armor>
+public class [PotionDatabase](https://github.com/Bmontezuma/atlas-unity-assets/blob/main/Assets/Editor/PotionDatabase.cs) : ItemDatabase<Potion>
+public class [WeaponDatabase](https://github.com/Bmontezuma/atlas-unity-assets/blob/main/Assets/Editor/WeaponDatabase.cs) : ItemDatabase<Weapon>
 Then add Buttons to the DatabasesManager window to open the three kinds of item databases.
 
 Here is an example of what we will eventually be building towards for the Database menus:
